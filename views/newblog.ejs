@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="/" class="home"><h2>blog-chan</h2></a>
+        <a href="/login" class="login">Login</a>
+        <a href="/signup" class="signup">SignUp</a>
+    </nav>
+    <div class="toolbar">
+        <div class="font-cont">
+            <label class="font-icon" for="fontsize"></label>
+            <input type="number" id="fontsize" max="64" min="12">
+        </div>
+        
+        <img class="icon bold" src="/public/assets/icons/bold.png" alt="">
+        <img class="icon italic" src="/public//assets/icons/italic.png" alt="">
+        <img class="text" src="/public/assets/icons/text.png" alt="">
+        <input type="file" id="media" accept="image/*,video/*,audio/*" name="" id="">
+        <label class="media" for="media"></label>
+        <img class="submit" src="/public/assets/icons/apply.png" alt="">
+    </div>
+    <input class="blogname" type="text" placeholder="Enter title of your blog..." required>
+    <div class="blog-container">
+        <article></article>
+    </div>
+    <div class="textarea-cont">
+        <textarea name="" id="" cols="30" rows="10" placeholder="type here..."></textarea>
+        <img class="submit-text" src="/public/assets/icons/plus.png" alt="">
+    </div>
+    
+    <script src="/public/js/style.js"></script>
+</body>
+</html>
