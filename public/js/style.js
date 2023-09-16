@@ -126,10 +126,6 @@ class Paragraph{
                 updateFileIndex(preInd)
                 
             }
-
-
-            
-           
         }
 
         
@@ -276,15 +272,7 @@ class Media{
             textareaCont.style.visibility = 'hidden'
 
             const deleteInd = files.indexOf(this.file)
-            // if(deleteInd!== 0 && deleteInd!== files.length-1){
-            //     for(let ind  = deleteInd+1;ind<files.length;ind++){
-            //         const fileInfoList = fileIndExt[ind].split('-')
-            //         const newInd = parseInt(fileInfoList[0])-1
-            //         console.log(fileInfoList); 
-            //         fileIndExt[ind] = `${newInd}-${fileInfoList[1]}`
-            //     }
-            // }
-            
+
             files.splice(deleteInd,1)
             fileIndExt.splice(deleteInd,1)
             
@@ -438,12 +426,24 @@ italic.addEventListener('click',e=>{
 
 const submit = document.querySelector('.submit')
 
-submit.addEventListener('click',async e=>{
+submit.addEventListener('click',async(e)=>{
     const formData = new FormData()
-    formData.append('style[a]','a')
-    formData.append('style[b]',27),
-    formData.append('text','asdgasdhgasjhdgasjhdgasjhdgasjhdg')
-    formData.append('file',fileInput.files[0])
+    formData.append('title',document.querySelector('.blogname').value)
+    for(let text of textList){
+        formData.append('textList[]',text)
+    }
+
+    for(let textStyle of textStyleList){
+        formData.append('textStyleList[]',textStyle)
+    }
+
+    for(let fileIE of fileIndExt){
+        formData.append('fileIndExt[]',fileIE)
+    }
+    for(let file of files){
+        formData.append('files[]',file)
+    }
+
     const res = await fetch('/newblog',{
         method:'POST',
         headers:{
@@ -453,6 +453,5 @@ submit.addEventListener('click',async e=>{
     })
     const js = await res.json()
     window.location.href = js.re
-
 
 })

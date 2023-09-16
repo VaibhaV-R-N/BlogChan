@@ -1,0 +1,8 @@
+<%- include('partials/header') %>
+<form action="/account/signup" method="post"  class="accountCont">
+    <input type="text" name="user[username]" placeholder="username">
+    <input type="email" name="user[email]" placeholder="email">
+    <input type="password" name="user[password]" placeholder="password">
+    <button>submit</button>
+</form>
+<%- include('partials/footer') %>

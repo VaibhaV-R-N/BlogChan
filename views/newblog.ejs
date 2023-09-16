@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/public/css/style.css">
-</head>
-<body>
-    <nav>
-        <a href="/" class="home"><h2>blog-chan</h2></a>
-        <a href="/login" class="login">Login</a>
-        <a href="/signup" class="signup">SignUp</a>
-    </nav>
+<%- include('partials/header') %>
     <div class="toolbar">
         <div class="font-cont">
             <label class="font-icon" for="fontsize"></label>
@@ -35,5 +22,5 @@
     </div>
     
     <script src="/public/js/style.js"></script>
-</body>
-</html>
+
+    <%- include('partials/footer') %>

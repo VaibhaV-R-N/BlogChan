@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+<h3 id="blog-title"><%= blog.title %></h3>
+<div class="details">
+    <h5 class="author">Author</h5>
+    <h5 class="uploaded">Uploaded on</h5>
+    <a href="<%= `/account/user/${blog.user._id}` %>"><h4><%= blog.user.username %></h4></a>
+    <h4 class="date"><%=blog.date  %></h4>
+</div>
+<script>
+    let blog = '<%-JSON.stringify(blog)%>'
+</script>
+
+<script src="/public/js/makeblog.js"></script>
+<%- include('partials/footer') %>
