@@ -34,6 +34,31 @@ const addTxtBtn = document.querySelector('.submit-text')
 const fontSize = document.querySelector('#fontsize')
 fontSize.value = 16
 
+fontSize.addEventListener('change',e=>{
+
+    try {
+        const value = parseInt(fontSize.value)
+        if(value=== NaN){
+  
+            fontSize.value = 16
+        }else {
+           
+            fontSize.value = value
+        }
+        if(fontSize.value<0){
+            fontSize.value = 16
+        }
+        if(fontSize.value >64){
+            fontSize.value = 64
+        }
+    } catch (error) {
+        fontSize.value = 16
+    }
+
+   
+   
+})
+
 const getTextStyle = ()=>{
     let styleNum = 0
     if(variables.bold){
@@ -424,11 +449,36 @@ italic.addEventListener('click',e=>{
     italic.style.borderBottom = "1px solid black"
 })
 
+const confirmCont = document.querySelector('.confirm-cont')
+const yes = document.querySelector('.yes')
+const no = document.querySelector('.no')
+const loading = document.querySelector('.loading')
 const submit = document.querySelector('.submit')
 
-submit.addEventListener('click',async(e)=>{
+confirmCont.addEventListener('click',e=>{
+    if(getComputedStyle(confirmCont).display === 'block'){
+        confirmCont.style.display = 'none'
+    }
+})
+
+yes.addEventListener('click',async e=>{
+    confirmCont.style.display ='none'
+    const title = document.querySelector('.blogname').value
+    if(title === '' || title === undefined){
+        inner.innerHTML = 'Blog title cannot be empty.'
+        outer.style.display = 'block'
+        return
+    }
+
+    if(textList.length === 0){
+        inner.innerHTML = 'Blog body should contain text.'
+        outer.style.display = 'block'
+        return
+    }
+
+    const size = 10 * 1024  * 1024
     const formData = new FormData()
-    formData.append('title',document.querySelector('.blogname').value)
+    formData.append('title',title)
     for(let text of textList){
         formData.append('textList[]',text)
     }
@@ -441,8 +491,18 @@ submit.addEventListener('click',async(e)=>{
         formData.append('fileIndExt[]',fileIE)
     }
     for(let file of files){
-        formData.append('files[]',file)
+        if(file.size <= size){
+            formData.append('files[]',file)
+        }
+        else{
+            inner.innerHTML = 'One of the file is too large, please select a file of size less than 10MB.'
+            outer.style.display = 'block'
+            return
+        }
+        
     }
+
+    loading.style.display = 'block'
 
     const res = await fetch('/newblog',{
         method:'POST',
@@ -453,5 +513,21 @@ submit.addEventListener('click',async(e)=>{
     })
     const js = await res.json()
     window.location.href = js.re
+})
+
+
+no.addEventListener('click',e=>{
+    confirmCont.style.display = 'none'
+})
+
+submit.addEventListener('click',async(e)=>{
+
+    confirmCont.style.display = 'block'
 
 })
+
+const footer = document.querySelector('.footer')
+
+footer.style.gridRow = '14/16'
+
+document.body.style.gap = '0'

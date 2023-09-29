@@ -4,23 +4,35 @@
             <label class="font-icon" for="fontsize"></label>
             <input type="number" id="fontsize" max="64" min="12">
         </div>
+            
         
         <img class="icon bold" src="/public/assets/icons/bold.png" alt="">
         <img class="icon italic" src="/public//assets/icons/italic.png" alt="">
         <img class="text" src="/public/assets/icons/text.png" alt="">
-        <input type="file" id="media" accept="image/*,video/*,audio/*" name="" id="">
-        <label class="media" for="media"></label>
+        <input type="file" id="media" accept="image/*,video/*,audio/*" name="" id="" >
+        <label class="media" for="media"><img src="/public/assets/icons/media.png" alt=""></label>
         <img class="submit" src="/public/assets/icons/apply.png" alt="">
     </div>
-    <input class="blogname" type="text" placeholder="Enter title of your blog..." required>
+    <input class="blogname" type="text" placeholder="Enter title of your blog..." required maxlength="150">
     <div class="blog-container">
         <article></article>
     </div>
-    <div class="textarea-cont">
+    <div class="textarea-cont txtanim">
         <textarea name="" id="" cols="30" rows="10" placeholder="type here..."></textarea>
         <img class="submit-text" src="/public/assets/icons/plus.png" alt="">
     </div>
-    
-    <script src="/public/js/style.js"></script>
-
+    <div class="confirm-cont">
+        <div class="confirm-inner">
+            <p>Are you sure you want to post the blog? Once posted it cannot be undone.</p>
+            <div class="confirmbtn">
+                <button class="yes">yes</button>
+                <button class="no">no</button>
+            </div>
+           
+        </div>
+    </div>
+    <div class="loading">
+        <img src="/public/assets/icons/loading.gif" alt="">
+    </div>
     <%- include('partials/footer') %>
+    <script src="/public/js/style.js"></script>

@@ -5,7 +5,10 @@ const passport = require('passport')
 const localStrategy = require('passport-local')
 const {User} = require('./models')
 const path = require('path')
-
+const MongoStore  = require('connect-mongo')
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config()
+  }
 const {root,newBlog, account} = require('./router')
 
 const app = express()
@@ -17,8 +20,16 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 app.use('/public',express.static(path.join(__dirname,'public')))
 
+const store = new MongoStore({
+    mongoUrl:process.env.DB_URL,
+    secret:process.env.STORE_SECRET,
+    touchAfter: 24 * 60 * 60
+})
+
+
 app.use(session({
-    secret:'vaibhav',
+    store,
+    secret:process.env.SESSION_SECRETS,
     resave:false,
     saveUninitialized:true
 }))
@@ -43,3 +54,11 @@ app.listen(3000,()=>{
 app.use('/',root)
 app.use('/newblog',newBlog)
 app.use('/account',account)
+
+app.use((err,req,res,next)=>{
+    const {message='something went wrong',status='500'} = err
+    req.session.message = message
+    req.session.status = status
+
+    res.redirect(req.originalUrl)
+})

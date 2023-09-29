@@ -1,12 +1,24 @@
 <% if(blogs.length > 0){ %>
     <div class="blog-cont">
         <% for(let blog of blogs){ %>
-            <a class="link" href="<%= `/blogs/${blog._id}` %>">
-                <div class="blog-card">
-                    <h2><%= blog.title %></h2>
-                    <h4><%= blog.date %></h4>
-                </div>
-            </a>
+                <a href="<%= `/blogs/${blog._id}` %>" class="link">
+                    <div class="blog-card">
+                        <input type="text" class="id" value="<%= blog._id %>" style="display: none;">
+                        <h2><%= blog.title %></h2>
+                        <div class="vote">
+                            <img  class="vote-icon upvote" src="/public/assets/icons/like(1).png" alt="">
+                            
+                            <label class="uno" for=""><%= blog.upvote%></label>
+                    
+                            <img  class="vote-icon downvote" src="/public/assets/icons/dislike.png" alt="">
+                       
+                            <label class="dno" for=""><%= blog.downvote%></label>
+                        </div>
+                        <h4><%= `Posted On: ${blog.date}`%>&nbsp &nbsp &nbsp &nbsp<%=`By: ${blog.user.username}`%></h4>
+                    </div>
+                </a>
+
         <% } %>
+        <script src="/public/js/blogs.js"></script>
     </div>
 <% } %>

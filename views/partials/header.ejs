@@ -7,12 +7,44 @@
     <link rel="stylesheet" href="/public/css/style.css">
 </head>
 <body>
-    <nav>
-        <a href="/" class="home"><h2>blog-chan</h2></a>
+    <nav class="bottomanim">
+        <a href="/" class="home"><b><h2 class="afteranim">blog-chan</h2></b></a>
         <% if(user){ %>
-            <a href="/account/logout" class="signup">Logout</a>
+            <a href="<%= `/blogs` %>" class="blogs"><h3 class="afteranim">blogs</h3></a>
+            <a href="<%= `/newblog` %>" class="newblog"><h3 class="afteranim">new-blog</h3></a>
+            <a href="<%= `/account/user/${user._id}` %>" class="myaccount"><h3 class="afteranim">account</h3></a>
+            <a href="/account/logout" class="signup"><h3 class="afteranim">logout</h3></a>
         <% } else {%>
-        <a href="/account/login" class="login">Login</a>
-        <a href="/account/signup" class="signup">SignUp</a>
+            <a href="<%= `/blogs` %>" class="blogs"><h3 class="afteranim">blogs</h3></a>
+            <a href="/account/login" class="login"><h3 class="afteranim">login</h3></a>
+            <a href="/account/signup" class="signup"><h3 class="afteranim">signup</h3></a>
         <% } %>
+        <img src="/public/assets/icons/menus.png" class="hamburger-icon" alt="">
+        
     </nav>
+    <div class="hamburger-container">
+        <div class="hamburger-inner">
+            <% if(user){ %>
+                <a href="<%= `/blogs` %>" ><h3 class="afteranim">blogs</h3></a>
+                <a href="<%= `/newblog` %>" ><h3 class="afteranim">new-blog</h3></a>
+                <a href="<%= `/account/user/${user._id}` %>" ><h3 class="afteranim">account</h3></a>
+                <a href="/account/logout" ><h3 class="afteranim">logout</h3></a>
+            <% } else {%>
+                <a href="<%= `/blogs` %>" ><h3 class="afteranim">blogs</h3></a>
+                <a href="/account/login" ><h3 class="afteranim">login</h3></a>
+                <a href="/account/signup" ><h3 class="afteranim">signup</h3></a>
+            <% } %>
+        </div>
+    </div>
+    <div class="error">
+        <p class="error-msg"></p>
+    </div>
+    <canvas></canvas>
+    <script src="/public/js/canvas.js"></script>
+    <script src="/public/js/hamburger.js"></script>
+    <script>
+        const message = '<%= message===undefined?undefined:message%>'
+        const Status = '<%= status===undefined?undefined:status%>'
+
+    </script>
+    <script src="/public/js/errorHandler.js"></script>

@@ -6,14 +6,6 @@ connectDB().catch(e=>{
     console.log('MONGODB COONECTION FALIED...');
 })
 
-const currentDate  = new Date()
-
-const getDate = ()=>{
-    const year = currentDate.getFullYear()
-    const month = currentDate.getMonth()+1
-    const date = currentDate.getDate()
-    return `${date}/${month}/${year}`
-}
 
 const BlogSchema = new Schema({
 
@@ -42,22 +34,74 @@ const BlogSchema = new Schema({
     }],
     date:{
         type:String,
-        default:getDate()
+
+    },
+    upvote:{
+        type:Number,
+        default:0
+    },
+    downvote:{
+        type:Number,
+        default:0
     }
 
 })
 
 const UserSchema = new Schema({
-    email:{
+    followers:[{
+        type:Schema.Types.ObjectId,
+        ref:'User'
+    }],
+    following:[{
+        type:Schema.Types.ObjectId,
+        ref:'User'
+    }],
+    date:{
         type:String,
-        required:true
+
+    }
+})
+UserSchema.plugin(passportLocalMongoose)
+
+const CommentSchema = new Schema({
+    user:{
+        type:mongoose.Types.ObjectId,
+        ref:'User'
+    },
+    blog:{
+        type:Schema.Types.ObjectId,
+        ref:'Blog'
+    },
+    comment:{
+        type:String
+    },
+    date:{
+        type:String,
+
     }
 })
 
-UserSchema.plugin(passportLocalMongoose)
+const VoteSchema = new Schema({
+    blog:{
+        type:Schema.Types.ObjectId,
+        ref:'Blog'
+    },
+    upvote:[{
+            type:Schema.Types.ObjectId,
+            ref:'User'}],
+            
+    downvote:[{
+            type:Schema.Types.ObjectId,
+            ref:'User'}]
+    
+})
+
+
+
 
 
 module.exports.Blog = mongoose.model('Blog',BlogSchema)
 module.exports.User = mongoose.model('User',UserSchema)
-
+module.exports.Vote = mongoose.model('Vote',VoteSchema)
+module.exports.Comment = mongoose.model('Comment',CommentSchema)
 

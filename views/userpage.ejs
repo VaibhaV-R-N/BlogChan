@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+<div class="user-details txtanim">
+    <h2><%= buser.username %></h2>
+    <h2 class="followers "><%= `followers ${buser.followers.length}` %></h2>
+    <h2 class="following "><%= `following ${buser.following.length}` %></h2>
+    <h4 style="color: var(--ten);"><%= `Date Joined ${buser.date}` %></h4>
+    <% if(buser._id +'' !== user._id +'' ) {%>
+        <% if(following===true){%>
+        <a href="<%= `/account/user/${buser._id}/unfollow` %>"><button  class="unfollow">Unfollow</button></a>    
+        <% }else{ %>
+        <a href="<%= `/account/user/${buser._id}/follow` %>"><button class="follow">Follow</button></a>
+        <% } %>
+        
+    <% } %>
+    
+</div>
+<h2 class="myblog" >Blogs</h2>
+
+<script>
+    let blogUser = '<%- JSON.stringify(buser)%>'
+    let isFollowing = '<%= following %>'
+    let user = '<%- JSON.stringify(user)%>'
+</script>
+
+<%- include('partials/blogs') %>
+<%- include('partials/footer') %>
+<script src="/public/js/userpage.js"></script>

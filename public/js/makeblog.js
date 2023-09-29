@@ -1,3 +1,5 @@
+
+
 blog = JSON.parse(blog)
 
 const textList = blog.textList
@@ -9,15 +11,13 @@ const fileIndExt = blog.fileIndExt? blog.fileIndExt:undefined
 
 const imgExt = ['jpg','jpeg','png','PNG','JPEG','JPG']
 const blogContainer = document.createElement('article')
-blogContainer.classList.add('article')
+blogContainer.classList.add('art')
 const ElementList = []
 const appendBreak = ()=>{
     for(let i = 0;i< 2;i++){
        blogContainer.appendChild(document.createElement('br'))
     }
 }
-
-
 
 for(let i = 0 ;i < textList.length;i++){
     
@@ -38,10 +38,9 @@ for(let i = 0 ;i < textList.length;i++){
     }
 
     const p = document.createElement('p')
-    // p.classList.add('p')
+
     p.innerHTML = text
     p.style.fontSize = fontsize + 'px'
-    p.style.color = '#F8FF95'
 
 
     ElementList.push(p)
@@ -102,4 +101,83 @@ for(element of ElementList){
     blogContainer.appendChild(element)
     appendBreak()
 }
-document.body.appendChild(blogContainer)
+document.body.append(blogContainer)
+
+
+
+
+const commentCont = document.createElement('div')
+const CommentClass = class{
+    constructor(username,date,comment){
+        this.username = username,
+        this.date = date,
+        this.comment = comment
+        this.container = document.createElement('div')
+        this.container.classList.add('container')
+        this.userName = document.createElement('h4')
+        this.a = document.createElement('a')
+        this.a.href = 
+        this.Date = document.createElement('h4')
+        this.Comment = document.createElement('p')
+        this.userName.innerHTML = this.username
+        this.Date.innerHTML = this.date
+        this.Comment.innerHTML = this.comment
+        this.container.appendChild(this.userName)
+        this.container.appendChild(this.Comment)
+        this.container.appendChild(this.Date)
+
+        commentCont.appendChild(this.container)
+
+    }
+}
+
+commentCont.classList.add('commentCont')
+const textarea = document.createElement('textarea')
+const submit = document.createElement('button')
+submit.textContent = 'submit'
+
+commentCont.appendChild(textarea)
+commentCont.appendChild(submit)
+
+submit.addEventListener('click',async e=>{
+    const data = new URLSearchParams()
+    data.append('comment',textarea.value)
+    const result = await fetch(`/blogs/${blog._id}/comment`,{
+        method:'POST',
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/x-www-form-urlencoded'
+        },
+        body:data
+    })
+
+    const commentObj = await result.json()
+    if(commentObj.re){
+        window.location.href = commentObj.re
+        return
+    }
+    new CommentClass(commentObj.user,commentObj.date,commentObj.comment)
+})
+
+const fetchComments = async()=>{
+    const result = await fetch(`/blogs/${blog._id}/comment`,{
+        method:'GET',
+        headers:{
+            Accept:'application/json'
+        }
+    })
+
+    const comments = await result.json()
+    for(let comment of comments){
+        new CommentClass(comment.user.username,comment.date,comment.comment)
+    }
+}
+
+fetchComments()
+document.body.append(commentCont)
+
+const footer = document.querySelector('.footer')
+
+footer.style.gridRow = '24/26'
+
+document.body.style.gap = '0'
