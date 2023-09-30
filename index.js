@@ -29,10 +29,11 @@ const store = new MongoStore({
 
 app.use(session({
     store,
-    secret:process.env.SESSION_SECRETS,
+    secret:'nrvaibhav',
     resave:false,
     saveUninitialized:true
 }))
+
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -46,8 +47,10 @@ app.use((req,res,next)=>{
 })
 
 
-app.listen(process.env.PORT,()=>{
-    console.log('LISTENING AT PORT:3000...');
+app.listen(3000,(e)=>{
+    if(e)console.log(e);
+    else
+        console.log('LISTENING AT PORT:3000...');
 })
 
 
