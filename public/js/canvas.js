@@ -20,7 +20,7 @@ window.addEventListener('mousemove',(e)=>{
 })
 let dragging = false
 window.addEventListener('touchstart',e=>{
-    print(true)
+
     dragging = true
 })
 window.addEventListener('touchmove',(e)=>{
@@ -34,7 +34,7 @@ window.addEventListener('touchmove',(e)=>{
 })
 
 window.addEventListener('touchend',e=>{
-    print(false)
+
     dragging = false
 })
 
