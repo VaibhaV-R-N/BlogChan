@@ -386,6 +386,15 @@ nav > .signup{
     gap: 3em;
 }
 
+.acc-title{
+    text-align: center;
+    font-family: var(--logo);
+    color: #490977;
+    padding: 1em;
+    position: relative;
+    top: 10%;
+}
+
 .saccountCont{
     position: absolute;
     display:flex;
