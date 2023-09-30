@@ -18,15 +18,25 @@ window.addEventListener('mousemove',(e)=>{
     mouseY  = e.clientY
 
 })
-
+let dragging = false
+window.addEventListener('touchstart',e=>{
+    print(true)
+    dragging = true
+})
 window.addEventListener('touchmove',(e)=>{
-    prevX = mouseX
-    prevY = mouseY
-    mouseX  = e.clientX
-    mouseY  = e.clientY
+    if(dragging === true){
+        prevX = mouseX
+        prevY = mouseY
+        mouseX  = e.clientX
+        mouseY  = e.clientY
+    }
 
 })
 
+window.addEventListener('touchend',e=>{
+    print(false)
+    dragging = false
+})
 
 resizeCanvas()
 

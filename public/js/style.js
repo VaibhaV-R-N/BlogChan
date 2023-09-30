@@ -1,4 +1,8 @@
 const blogContainer =  document.querySelector('.blog-container')
+canvas.style.display = 'none'
+
+outer.style.display = 'block'
+inner.innerHTML = "Tips<br>1. Use the Text[T] button from the menu to insert text to the body.<br>2. Use the media button from the menu to add images and videos."
 
 
 const variables = {
@@ -342,6 +346,14 @@ class Media{
     setMedia(){
         
         const imgExt = ['jpg','JPG','jpeg','JPEG','png','PNG']
+        const extListCheck = imgExt + ['mp4','mp3']
+
+        if(extListCheck.indexOf(this.ext)=== -1){
+            outer.style.display = 'block'
+            inner.innerHTML = 'File type not supported.'
+            return
+        }
+
         if(variables.order){
             if(variables.file){
                 const preInd = files.indexOf(variables.file)
@@ -410,6 +422,8 @@ class Media{
             }
             return
         }
+
+        
     }
 }
 

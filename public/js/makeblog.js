@@ -1,5 +1,4 @@
-
-
+canvas.style.display = 'none'
 blog = JSON.parse(blog)
 
 const textList = blog.textList
@@ -132,14 +131,23 @@ const CommentClass = class{
 }
 
 commentCont.classList.add('commentCont')
+const h2 = document.createElement('h2')
+h2.innerHTML = "Leave a comment..."
+h2.classList.add('comment-heading')
 const textarea = document.createElement('textarea')
 const submit = document.createElement('button')
 submit.textContent = 'submit'
-
+commentCont.appendChild(h2)
 commentCont.appendChild(textarea)
 commentCont.appendChild(submit)
 
 submit.addEventListener('click',async e=>{
+
+    if(textarea.value === ''){
+        inner.innerHTML = 'Cannot submit empty comment.'
+        outer.style.display = 'block'
+        return
+    }
     const data = new URLSearchParams()
     data.append('comment',textarea.value)
     const result = await fetch(`/blogs/${blog._id}/comment`,{

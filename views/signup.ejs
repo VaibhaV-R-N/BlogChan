@@ -1,14 +1,14 @@
 <%- include('partials/header') %>
 <h2 style="text-align: center;font-family: var(--logo);color: #490977; padding: 1em;">Create a new Account</h2>
-<form action="/account/signup" method="post"  class="accountCont">
+<form action="/account/signup" method="post"  class="saccountCont">
     <input type="text" name="user[username]" placeholder="username">
     <input type="password" name="user[password]" placeholder="password">
     <input type="password" name="user[cpassword]" placeholder="confirm password">
     <button class="accbtn">submit</button>
 </form>
 
-<script>
-    document.querySelector('.accountCont').style.height = '60%'
-</script>
+<!-- <script>
+    document.querySelector('.accountCont').style.height = '50%'
+</script> -->
 
 <%- include('partials/footer') %>
