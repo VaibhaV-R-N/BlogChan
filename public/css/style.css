@@ -633,7 +633,7 @@ nav > .signup{
     text-align: center;
     padding: 1em;
     color: var(--thirty);
-    width: 90%;
+    width: 100%;
     left: 5%;
     background-color:var(--sixty);
 }
