@@ -5,7 +5,7 @@
     <a href="<%= `/account/user/${blog.user._id}` %>"><h4><%= blog.user.username %></h4></a>
     <h4 class="date"><%=blog.date  %></h4>
 </div>
-<h2 style="word-break: break-all; overflow-y: auto;" class="bottomanim" id="blog-title"><%= blog.title %></h2>
+<h2 style="word-break: break-all; overflow-y: auto; height: fit-content;" class="bottomanim" id="blog-title"><%= blog.title %></h2>
 
 <script>
     let blog = '<%-JSON.stringify(blog)%>'
